@@ -3,32 +3,36 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: "Netflix Sans";
-    src: local("Netflix-Regular"),
-        url("./fonts/Netflix-Regular.wofl2") format("wofl2");
+  font-family: "Netflix Sans";
+  src:
+    local("Netflix-Regular"),
+    url("/fonts/Netflix-Regular.wofl2") format("wofl2");
 }
 
 @font-face {
-    font-family: "Netflix Sans";
-    src: local("Netflix-Bold"),
-        url("./fonts/Netflix-Bold.wofl2") format("wofl2");
-    font-weight: bold;
+  font-family: "Netflix Sans";
+  src:
+    local("Netflix-Bold"),
+    url("/fonts/Netflix-Bold.wofl2") format("wofl2");
+  font-weight: bold;
 }
 
 @font-face {
-    font-family: "Netflix Sans";
-    src: local("Netflix-Medium"),
-        url("./fonts/Netflix-Medium.wofl2") format("wofl2");
-    font-weight: 600;
+  font-family: "Netflix Sans";
+  src:
+    local("Netflix-Medium"),
+    url("/fonts/Netflix-Medium.wofl2") format("wofl2");
+  font-weight: 600;
 }
 
 @font-face {
-    font-family: "Netflix Sans";
-    src: local("Netflix-Light"),
-        url("./fonts/Netflix-Light.wofl2") format("wofl2");
-    font-weight: 300;
+  font-family: "Netflix Sans";
+  src:
+    local("Netflix-Light"),
+    url("/fonts/Netflix-Light.wofl2") format("wofl2");
+  font-weight: 300;
 }
 
 body {
-    font-family: "Netflix Sans";
+  font-family: "Netflix Sans";
 }
