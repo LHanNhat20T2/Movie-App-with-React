@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CircularProgressBar from "../CircularProgressBar";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { groupBy } from "lodash";
+import ImageComponents from "@components/ImageComponents";
 
 const Banner = ({ mediaInfo }) => {
   const certification = (
@@ -19,14 +20,16 @@ const Banner = ({ mediaInfo }) => {
 
   return (
     <div className="relative overflow-hidden text-white">
-      <img
+      <ImageComponents
         className="absolute inset-0 brightness-[.2]"
         src={`https://image.tmdb.org/t/p/original${mediaInfo.backdrop_path}`}
         alt=""
       />
       <div className="relative mx-auto flex max-w-screen-xl gap-6 px-6 py-10 lg:gap-8">
         <div className="flex-1">
-          <img
+          <ImageComponents
+            width={600}
+            height={900}
             className="h-full object-cover"
             src={`https://image.tmdb.org/t/p/original${mediaInfo.backdrop_path}`}
             alt="Movie backdrop"

@@ -1,63 +1,23 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 import Loading from "@components/Loading";
 import Banner from "@components/MeadiaDetail/Banner";
 import ActorList from "@components/MeadiaDetail/ActorList";
 import RelatedMediaList from "@/components/MeadiaDetail/RelatedMediaList";
 import MovieInformation from "@components/MeadiaDetail/MovieInformation";
+import useFetch from "@hooks/useFetch";
 const MovieDetail = () => {
   const { id } = useParams();
-  const [movieInfo, setMovieInfo] = useState([]);
-  const [relatedMovies, setRelatedMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isRelatedMovieListLoading, setIsRelatedMovieLoading] = useState(false);
-  useEffect(() => {
-    setIsLoading(true);
-    fetch(
-      `https://api.themoviedb.org/3/movie/${id}?append_to_response=release_dates,credits`,
-      {
-        method: "GET",
-        headers: {
-          accept: "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlODM2OTBlODkzYjUwOTIxZmUwMGQyYmU4MjI5OWIzZSIsIm5iZiI6MTcyODM1MDYyMC44NzQxNDYsInN1YiI6IjY1MTYzM2I1YTE5OWE2MDBjNDljZTZjNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gJ21qFx-TSxVdl5ljJoFDedwF7FCMu-F225icwcBRns",
-        },
-      },
-    )
-      .then(async (res) => {
-        const data = await res.json();
-        setMovieInfo(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, [id]);
-  useEffect(() => {
-    setIsRelatedMovieLoading(true);
-    fetch(`https://api.themoviedb.org/3/movie/${id}/recommendations`, {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlODM2OTBlODkzYjUwOTIxZmUwMGQyYmU4MjI5OWIzZSIsIm5iZiI6MTcyODM1MDYyMC44NzQxNDYsInN1YiI6IjY1MTYzM2I1YTE5OWE2MDBjNDljZTZjNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gJ21qFx-TSxVdl5ljJoFDedwF7FCMu-F225icwcBRns",
-      },
-    })
-      .then(async (res) => {
-        const data = await res.json();
-        const currentRelatedMovies = (data.results || []).slice(0, 12);
-        setRelatedMovies(currentRelatedMovies);
-        // setMovieInfo(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setIsRelatedMovieLoading(false);
-      });
-  }, [id]);
+
+  const { data: movieInfo, isLoading } = useFetch({
+    url: `/movie/${id}?append_to_response=release_dates,credits`,
+  });
+
+  const { data: recommandationsResponse, isLoading: isRelatedMoviesLoading } =
+    useFetch({
+      url: `/movie/${id}/recommendations`,
+    });
+
+  const relatedMovies = recommandationsResponse.results || [];
   if (isLoading) {
     <Loading />;
   }
@@ -75,7 +35,10 @@ const MovieDetail = () => {
             ) : (
               <Loading />
             )}
-            <RelatedMediaList mediaList={relatedMovies} />
+            <RelatedMediaList
+              mediaList={relatedMovies}
+              isLoading={isRelatedMoviesLoading}
+            />
           </div>
 
           <div className="flex-1">

@@ -1,10 +1,11 @@
+import ImageComponents from "@components/ImageComponents";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Movie = ({ data }) => {
   const { backdrop_path, title, release_date, overview } = data || {}; // Kiểm tra nếu 'data' tồn tại
   return (
     <div>
-      <img
+      <ImageComponents
         className="aspect-video w-full brightness-50"
         src={`https://image.tmdb.org/t/p/original${backdrop_path}`}
         alt=""
@@ -23,11 +24,11 @@ const Movie = ({ data }) => {
             <p>{overview}</p>
           </div>
           <div className="mt-4">
-            <button className="text-10 lg:text-2 mr-4 rounded bg-white px-4 py-2 text-black">
+            <button className="lg:text-2 mr-4 rounded bg-white px-4 py-2 text-10 text-black">
               <FontAwesomeIcon icon={faPlay} />
               Trailer
             </button>
-            <button className="text-10 rounded bg-slate-300/35 px-4 py-2 lg:text-lg">
+            <button className="rounded bg-slate-300/35 px-4 py-2 text-10 lg:text-lg">
               View detail
             </button>
           </div>

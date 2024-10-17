@@ -1,33 +1,37 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import MovieCard from "@components/MovieCard";
+import useFetch from "@hooks/useFetch";
 
 const MediaList = ({ title, tabs }) => {
-  const [mediaList, setMediaList] = useState([]);
+  // const [mediaList, setMediaList] = useState([]);
   const [activeTabId, setActiveTabId] = useState(tabs[0]?.id);
+  const url = tabs.find((tab) => tab.id === activeTabId)?.url;
 
-  useEffect(() => {
-    const url = tabs.find((tab) => tab.id === activeTabId)?.url;
+  const { data } = useFetch({ url });
+  const mediaList = (data.results || []).slice(0, 12);
+  // useEffect(() => {
+  //   const url = tabs.find((tab) => tab.id === activeTabId)?.url;
 
-    if (url) {
-      fetch(url, {
-        method: "GET",
-        headers: {
-          accept: "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlODM2OTBlODkzYjUwOTIxZmUwMGQyYmU4MjI5OWIzZSIsIm5iZiI6MTcyODM1MDYyMC44NzQxNDYsInN1YiI6IjY1MTYzM2I1YTE5OWE2MDBjNDljZTZjNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gJ21qFx-TSxVdl5ljJoFDedwF7FCMu-F225icwcBRns",
-        },
-      })
-        .then(async (res) => {
-          const data = await res.json();
-          const trendingMediaList = data.results.slice(0, 12);
-          setMediaList(trendingMediaList);
-          console.log({ data });
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        });
-    }
-  }, [activeTabId, tabs]);
+  //   if (url) {
+  //     fetch(url, {
+  //       method: "GET",
+  //       headers: {
+  //         accept: "application/json",
+  //         Authorization:
+  //           "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlODM2OTBlODkzYjUwOTIxZmUwMGQyYmU4MjI5OWIzZSIsIm5iZiI6MTcyODM1MDYyMC44NzQxNDYsInN1YiI6IjY1MTYzM2I1YTE5OWE2MDBjNDljZTZjNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gJ21qFx-TSxVdl5ljJoFDedwF7FCMu-F225icwcBRns",
+  //       },
+  //     })
+  //       .then(async (res) => {
+  //         const data = await res.json();
+  //         const trendingMediaList = data.results.slice(0, 12);
+  //         setMediaList(trendingMediaList);
+  //         console.log({ data });
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error fetching data:", error);
+  //       });
+  //   }
+  // }, [activeTabId, tabs]);
 
   return (
     <div className="bg-black px-8 py-10 text-[1.2vw] text-white">
