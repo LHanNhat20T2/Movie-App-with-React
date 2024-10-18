@@ -1,4 +1,4 @@
-import FeatureMovie from "../components/FeatureMovies";
+import FeatureMovie from "@components/FeatureMovies/FeatureMovie";
 import MediaList from "../components/MediaList";
 import { TOP_RATED_TABS, TRENDING_TABS } from "../libs/contants";
 

@@ -1,15 +1,25 @@
+import { useModalContext } from "@components/context/ModalProvider";
 import ImageComponents from "@components/ImageComponents";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-const Movie = ({ data }) => {
-  const { backdrop_path, title, release_date, overview } = data || {}; // Kiểm tra nếu 'data' tồn tại
+import { Link } from "react-router-dom";
+
+const Movie = ({ data, trailerVideoKey }) => {
+  const { id, backdrop_path, title, release_date, overview } = data || {};
+
+  const { openPopup } = useModalContext();
+
   return (
     <div>
-      <ImageComponents
-        className="aspect-video w-full brightness-50"
-        src={`https://image.tmdb.org/t/p/original${backdrop_path}`}
-        alt=""
-      />
+      {backdrop_path ? (
+        <ImageComponents
+          className="aspect-video w-full brightness-50"
+          src={`https://image.tmdb.org/t/p/original${backdrop_path}`}
+          alt={title || "Movie Image"}
+        />
+      ) : (
+        <div>No image available</div>
+      )}
       <div className="absolute bottom-[10%] left-8 w-1/2 sm:w-1/3">
         <p className="mb-2 font-bold sm:text-[2vw]">{title}</p>
         <div>
@@ -24,13 +34,26 @@ const Movie = ({ data }) => {
             <p>{overview}</p>
           </div>
           <div className="mt-4">
-            <button className="lg:text-2 mr-4 rounded bg-white px-4 py-2 text-10 text-black">
+            <button
+              onClick={() => {
+                openPopup(
+                  <iframe
+                    title="Trailer"
+                    src={`https://www.youtube.com/embed/${trailerVideoKey}`}
+                    className="aspect-video w-[50vw]"
+                  ></iframe>,
+                );
+              }}
+              className="mr-2 rounded bg-white px-4 py-2 text-10 text-black lg:text-lg"
+            >
               <FontAwesomeIcon icon={faPlay} />
               Trailer
             </button>
-            <button className="rounded bg-slate-300/35 px-4 py-2 text-10 lg:text-lg">
-              View detail
-            </button>
+            <Link to={`/movie/${id}`}>
+              <button className="rounded bg-slate-300/35 px-4 py-2 text-10 lg:text-lg">
+                View detail
+              </button>
+            </Link>
           </div>
         </div>
       </div>
