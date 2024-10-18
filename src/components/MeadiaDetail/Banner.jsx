@@ -25,7 +25,9 @@ const Banner = ({
         width={1200}
         height={800}
         className="absolute inset-0 aspect-video w-full brightness-[.2]"
-        src={`https://image.tmdb.org/t/p/original${backdropPath}`}
+        src={
+          backdropPath && `https://image.tmdb.org/t/p/original${backdropPath}`
+        }
         alt=""
       />
       <div className="relative mx-auto flex max-w-screen-xl gap-6 px-6 py-10 lg:gap-8">
@@ -34,7 +36,9 @@ const Banner = ({
             width={600}
             height={900}
             className="h-full object-cover"
-            src={`https://image.tmdb.org/t/p/original${posterPath}`}
+            src={
+              posterPath && `https://image.tmdb.org/t/p/original${posterPath}`
+            }
             alt="Movie backdrop"
           />
         </div>

@@ -1,51 +1,56 @@
 import ImageComponents from "@components/ImageComponents";
 import RelatedMediaList from "@components/MeadiaDetail/RelatedMediaList";
+import { GENDER_MAPPING } from "@libs/contants";
+import { useLoaderData } from "react-router-dom";
 
 const PeoplePage = () => {
+  const peopleInfo = useLoaderData();
+  console.log({ peopleInfo });
   return (
-    <div>
+    <div className="text[1.2vw] bg-black text-white">
       <div className="container">
         <div className="flex-1">
-          <ImageComponents width={600} height={900} className="mb-6" />
+          <ImageComponents
+            src={
+              peopleInfo.profile_path &&
+              `https://media.themoviedb.org/t/p/w600_and_h900_bestv2${peopleInfo.profile_path}`
+            }
+            width={600}
+            height={900}
+            className="mb-6"
+          />
           <div>
-            <p className="mb-6 text-lg font-bold">Person Info</p>
+            <p className="mb-6 text-[1.3vw] font-bold">Person Info</p>
             <div className="space-y-4">
               <div>
                 <p className="font-bold">Know For</p>
-                <p>Acting</p>
+                <p>{peopleInfo.known_for_department}</p>
               </div>
               <div>
                 <p className="font-bold">Gender</p>
-                <p>Male</p>
+                <p>{GENDER_MAPPING[peopleInfo.gender]}</p>
               </div>
               <div>
                 <p className="font-bold">Place of Birth</p>
-                <p>Northamton</p>
+                <p>{peopleInfo.place_of_birth}</p>
               </div>
               <div>
-                <p className="font-bold">Know For</p>
-                <p>2024-02-03</p>
+                <p className="font-bold">Birthday</p>
+                <p>{peopleInfo.birthday}</p>
               </div>
             </div>
           </div>
         </div>
         <div className="flex-[2]">
-          <p className="mb-6 text-2xl font-bold">Matt Smith</p>
+          <p className="mb-6 text-[2vw] font-bold">{peopleInfo.name}</p>
           <div className="mb-6">
-            <p className="mb-4 text-lg font-bold">Biography</p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
-              officiis, temporibus quibusdam dicta odio vitae eius magni totam
-              animi corporis reiciendis eligendi saepe tenetur veniam sed beatae
-              est, quae sit, commodi nostrum incidunt quaerat voluptatem
-              consequatur. Qui nam, esse quisquam consequatur dolores rem
-              soluta, sed odio nisi explicabo sunt culpa.
-            </p>
+            <p className="mb-4 font-bold text-[1.4]">Biography</p>
+            <p className="whitespace-pre-line">{peopleInfo.biography}</p>
           </div>
-          <div>
-            <p>Know For</p>
-            <RelatedMediaList />
-          </div>
+          <RelatedMediaList
+            mediaList={peopleInfo.combined_credits?.cast || []}
+            title="Known For"
+          />
         </div>
       </div>
     </div>

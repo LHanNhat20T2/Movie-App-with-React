@@ -16,7 +16,7 @@ const MovieCard = ({ id, title, releaseDate, poster, point, mediaType }) => {
         )}
         <Image
           className="w-full rounded-lg"
-          src={`https://image.tmdb.org/t/p/w500${poster}`}
+          src={poster && `https://image.tmdb.org/t/p/w500${poster}`}
           alt=""
           width={200}
           height={300}
