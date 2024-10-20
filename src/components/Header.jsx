@@ -9,15 +9,20 @@ const Header = () => {
         <Link to="/">
           <img src="/netflix.png" alt="" className="w-16 sm:w-28" />
         </Link>
-        <a href="" className="text-sm lg:text-lg">
-          Phim
-        </a>
-        <a href="" className="text-sm lg:text-lg">
-          Truyền hình
-        </a>
+        <Link to="/search?mediaType=movie" className="text-sm lg:text-lg">
+          Movie
+        </Link>
+        <Link to="/search?mediaType=tv" className="text-sm lg:text-lg">
+          TV Show
+        </Link>
       </div>
       <div>
-        <FontAwesomeIcon icon={faMagnifyingGlass} className="cursor-pointer" />
+        <Link to="/search">
+          <FontAwesomeIcon
+            icon={faMagnifyingGlass}
+            className="cursor-pointer"
+          />
+        </Link>
       </div>
     </header>
   );
