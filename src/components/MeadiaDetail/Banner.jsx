@@ -27,7 +27,7 @@ const Banner = ({
         className="absolute inset-0 aspect-video w-full brightness-[.2]"
         src={
           backdropPath &&
-          `https://hannhat-netflix.onrender.com/t/p/original${backdropPath}`
+          `https://media.themoviedb.org/t/p/original${backdropPath}`
         }
         alt=""
       />
@@ -39,7 +39,7 @@ const Banner = ({
             className="h-full object-cover"
             src={
               posterPath &&
-              `https://hannhat-netflix.onrender.com/t/p/original${posterPath}`
+              `https://media.themoviedb.org/t/p/original${posterPath}`
             }
             alt="Movie backdrop"
           />
@@ -67,7 +67,7 @@ const Banner = ({
                 openPopup(
                   <iframe
                     title="Trailer"
-                    src={`https://hannhat-netflix.onrender.com/embed/${trailerVideoKey}`}
+                    src={`https://media.themoviedb.org/embed/${trailerVideoKey}`}
                     className="aspect-video w-[50vw]"
                   ></iframe>,
                 );
