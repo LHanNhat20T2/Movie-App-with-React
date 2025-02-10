@@ -5,7 +5,7 @@ import MediaTypeInput from "./FormInputs/MediaTypeInput";
 import GenresInput from "./FormInputs/GenresInput";
 import RatingInput from "./FormInputs/RatingInput";
 import { useEffect } from "react";
-
+import { useSearchParams } from "react-router-dom";
 const SearchForm = ({ setSearchFormValues }) => {
   const [searchParams] = useSearchParams();
   const mediaType = searchParams.get("mediaType");
@@ -24,15 +24,13 @@ const SearchForm = ({ setSearchFormValues }) => {
   };
 
   useEffect(() => {
-    // Thực hiện hành động gì đó khi mediaType thay đổi
     console.log("MediaType changed:", mediaType);
-  }, [mediaType]); // mediaType là biến phụ thuộc
+  }, [mediaType]);
 
   const formValues = watch();
 
   useEffect(() => {
     setSearchFormValues(formValues);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(setSearchFormValues)]);
   return (
     <div className="rounded-lg border p-4 shadow-md">
