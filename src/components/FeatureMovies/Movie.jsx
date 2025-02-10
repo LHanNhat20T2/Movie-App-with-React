@@ -16,7 +16,7 @@ const Movie = ({ data, trailerVideoKey }) => {
           className="aspect-video w-full brightness-50"
           src={
             backdrop_path &&
-            `https://image.tmdb.org/t/p/original${backdrop_path}`
+            `https://hannhat-netflix.onrender.com/t/p/original${backdrop_path}`
           }
           alt={title || "Movie Image"}
         />
@@ -42,7 +42,7 @@ const Movie = ({ data, trailerVideoKey }) => {
                 openPopup(
                   <iframe
                     title="Trailer"
-                    src={`https://www.youtube.com/embed/${trailerVideoKey}`}
+                    src={`https://hannhat-netflix.onrender.com/embed/${trailerVideoKey}`}
                     className="aspect-video w-[50vw]"
                   ></iframe>,
                 );
